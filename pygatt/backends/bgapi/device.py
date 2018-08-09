@@ -106,7 +106,7 @@ class BGAPIBLEDevice(BLEDevice):
         self._backend.send_command(
             CommandBuilder.attclient_read_long(
                 self._handle, handle))
-         self._backend.expect(ResponsePacketType.attclient_read_long)
+        self._backend.expect(ResponsePacketType.attclient_read_long)
         success = False
         resp = b""
         while not success:
@@ -114,7 +114,7 @@ class BGAPIBLEDevice(BLEDevice):
                 [EventPacketType.attclient_attribute_value,
                  EventPacketType.attclient_procedure_completed],
                 timeout=timeout)
-             if (matched_packet_type ==
+            if (matched_packet_type ==
                     EventPacketType.attclient_attribute_value):
                 if response['atthandle'] == handle:
                     # Concatenate the data

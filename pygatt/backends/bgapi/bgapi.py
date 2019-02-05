@@ -423,7 +423,7 @@ class BGAPIBackend(BLEBackend):
             exc.__cause__ = None
             raise exc
 
-    def discover_characteristics(self, connection_handle):
+    def discover_characteristics(self, connection_handle, timeout=5):
         att_handle_start = 0x0001  # first valid handle
         att_handle_end = 0xFFFF  # last valid handle
         log.info("Fetching characteristics for connection %d",
@@ -434,7 +434,7 @@ class BGAPIBackend(BLEBackend):
 
         self.expect(ResponsePacketType.attclient_find_information)
         self.expect(EventPacketType.attclient_procedure_completed,
-                    timeout=10)
+                    timeout=timeout)
 
         for char_uuid_str, char_obj in (
                 self._characteristics[connection_handle].items()):

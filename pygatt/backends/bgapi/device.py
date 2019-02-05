@@ -162,7 +162,7 @@ class BGAPIBLEDevice(BLEDevice):
         self._handle = None
 
     @connection_required
-    def discover_characteristics(self):
+    def discover_characteristics(self, timeout):
         self._characteristics = self._backend.discover_characteristics(
-            self._handle)
+            self._handle, timeout=timeout)
         return self._characteristics

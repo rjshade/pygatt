@@ -188,18 +188,20 @@ class BLEDevice(object):
             else:
                 log.debug("Already unsubscribed from uuid=%s", uuid)
 
-    def get_handle(self, char_uuid):
+    def get_handle(self, char_uuid, timeout=5):
         """
         Look up and return the handle for an attribute by its UUID.
         :param char_uuid: The UUID of the characteristic.
         :type uuid: str
+        :param timeout: Discover characteristics timeout.
+        :type timeout: float
         :return: None if the UUID was not found.
         """
         if isinstance(char_uuid, string_type):
             char_uuid = UUID(char_uuid)
         log.debug("Looking up handle for characteristic %s", char_uuid)
         if char_uuid not in self._characteristics:
-            self._characteristics = self.discover_characteristics()
+            self._characteristics = self.discover_characteristics(timeout=timeout)
 
         characteristic = self._characteristics.get(char_uuid)
         if characteristic is None:

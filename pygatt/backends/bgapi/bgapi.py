@@ -210,7 +210,7 @@ class BGAPIBackend(BLEBackend):
 
             # Wait before re-opening the port - required on at least Windows,
             # possibly OS X.
-            time.sleep(1)
+            time.sleep(2)
 
         self._open_serial_port()
         self._receiver = threading.Thread(target=self._receive)
